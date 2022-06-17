@@ -1,7 +1,10 @@
 export const ApiCatalogoPokemon = {
   /**Parametros Id*/
-  ObtenerPokemonId:"pokemons",
-  ObtenerListaPokemons:"pokemons"
+  obtenerPokemonId:"",
+  obtenerListaPokemons:"",
+  crearRegistro:"",
+  eliminar:"pokemons/",
+  actualizar:"pokemons/"
 }
 
 export const ApiEjemplos = {

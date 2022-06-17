@@ -1,4 +1,4 @@
 export interface listaApiGet{
-    nombreParametro:string,
-    valor:string
+    nombreParametro:any,
+    valor:any
 }

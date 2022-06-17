@@ -6,8 +6,8 @@ export const CodigosHTTP = {
     NOT_FOUND: 404,
     NOT_CONECTION: 0
   }
-  
 
-  export const nomenclaturaHTTP={
-    divisorParametrosGet: "&"
-  }
+
+export const nomenclaturaHTTP={
+  divisorParametrosGet: "&"
+}

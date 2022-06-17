@@ -19,7 +19,7 @@ describe('UtilServiceService', () => {
     let respuestaServicio = service.concatenarParametrosGet([{nombreParametro: "idAuthor", valor:"1"}]);
     expect(respuestaServicio).toEqual(respuestaEsperada);
   });
-  
+
   it('Concatenacion de varios parametro exitosa', () => {
     const respuestaEsperada = "?idAuthor=1&nombre=juanca&edad=7&ciudad=La mana";
     let respuestaServicio = service.concatenarParametrosGet([

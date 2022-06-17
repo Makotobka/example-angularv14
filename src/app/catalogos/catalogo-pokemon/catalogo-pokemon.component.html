@@ -1,29 +1,48 @@
-<div id="contenedor" class="css-contenedor" *ngIf="!selectRow; else popupPokemon">
-  <h4>Listado de pokemon</h4>
-  <div class="css-filtros">
-    <input
-      type="text"
-      id="nombre"
-    >
-    <button class="css-boton-icono">E</button>
+<div id="contenedor" class="css-contenedor" >
+  <div *ngIf="!isPopup; else popupPokemon">
+    <h1>Listado de pokemon</h1>
+    <div class="css-filtros css-padding css-texto-centro-2">
+      <div class="css-flex-grid-1">
+        <img class="css-icono-w css-icono-inner" src="../../../assets/iconos/search.png" alt="" />
+        <input
+          class="css-input-1"
+          type="text"
+          id="filtro"
+          placeholder="Buscar"
+          [formControl]="itemForm.controls['filtro']"
+        >
+      </div>
+      <div>
+        <button
+          class="css-boton-accion"
+          id="btn_nuevo"
+          (click)="nuevoRegistro()"
+        >
+          <img class="css-icono-w" src="../../../assets/iconos/add.png" alt="" />
+          Nuevo
+        </button>
+      </div>
+    </div>
+    <div class="css-tablaDatos css-padding">
+      <table >
+        <ng-template [ngTemplateOutlet]="tablaCabecera"></ng-template>
+        <ng-template
+            *ngFor="let item of lsPokemon; trackBy: util.trackByFn"
+            [ngTemplateOutlet]="filasDatos"
+            [ngTemplateOutletContext]="{ fila: item}"
+        > </ng-template>
+      </table>
+    </div>
   </div>
-  <div class="css-tablaDatos">
-    <table >
-      <ng-template [ngTemplateOutlet]="tablaCabecera"></ng-template>
-      <ng-template
-          *ngFor="let item of lsPokemon"
-          [ngTemplateOutlet]="filasDatos"
-          [ngTemplateOutletContext]="{ fila: item}"
-      > </ng-template>
-    </table>
-  </div>
+
 </div>
 
 
 <ng-template #popupPokemon>
   <app-popup-catalogo-pokemon
-    (submit)="submitPopup($event)"
+    (submitEvent)="submitPopup($event)"
     [data]="selectRow"
+    [isNuevo]="selectRow?.id === undefined"
   ></app-popup-catalogo-pokemon>
 </ng-template>
 <ng-template #tablaCabecera>
@@ -34,31 +53,38 @@
     <th >Acciones</th>
 </ng-template>
 <ng-template #filasDatos let-fila="fila">
-    <tr >
+    <tr>
         <td>
-          <div>{{fila?.author?.login || 'No data'}}</div>
+          <div>{{fila?.name || 'No data'}}</div>
         </td>
         <td>
           <div class="css-texto-centro-0">
-            <img class="css-imagen-1" (click)="abrirImagen(fila?.author?.avatar_url)" [src]="fila?.author?.avatar_url" alt="">
+            <img class="css-imagen-1" (click)="abrirImagen(fila?.image)" [src]="fila?.image" alt="">
           </div>
         </td>
         <td>
           <div>
-            {{fila?.author?.id || '0'}}
+            {{fila?.attack || '0'}}
           </div>
         </td>
         <td>
-          <div>{{fila?.committer?.id || 'No data'}}</div>
+          <div>{{fila?.defense || 'No data'}}</div>
         </td>
         <td>
           <div class="css-texto-centro-1">
             <button
-              class="css-boton-icono"
+              class="css-boton-icono "
               (click)="popupItemPokemon(fila)"
-            >A</button>
+            >
+              <img class="css-icono-w" src="../../../assets/iconos/edit.png" alt="" />
+            </button>
             &nbsp;
-            <button class="css-boton-icono">E</button>
+            <button
+              class="css-boton-icono"
+              (click)="eliminarPokemon(fila)"
+            >
+            <img class="css-icono-w" src="../../../assets/iconos/delete.png" alt="" />
+            </button>
           </div>
         </td>
     </tr>

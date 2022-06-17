@@ -1,0 +1,29 @@
+<div [ngSwitch]="tipoInput">
+  <div class="css-flex-grid-1" *ngSwitchCase="tipoInputConst.TEXTO">
+    <label class="css-label">{{label}}</label>
+    <input
+      class="css-input-0"
+      type="text"
+      id="txt_tipo"
+      [ngStyle]="{'border-color': _control.invalid ? 'red' : 'black'}"
+      [placeholder]="placeholder"
+      [formControl]="_control"
+    >
+
+  </div>
+  <div class="css-flex-grid-1" *ngSwitchCase="tipoInputConst.RANGO">
+    <label class="css-label">{{label}}</label>
+    <input
+      class="css-input-0 slider"
+      type="range"
+      id="Ataque"
+      [min]="minimo"
+      [max]="maximo"
+      [ngStyle]="{'border-color': _control.invalid ? 'red' : 'black'}"
+      placeholder="Ataque"
+      [formControl]="_control"
+    >
+  </div>
+  <div *ngSwitchDefault>No existe este componente</div>
+  <span *ngIf="_control?.errors?.required" style="color: red;">Campo requerido</span>
+</div>

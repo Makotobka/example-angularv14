@@ -22,23 +22,23 @@ export class CrudService {
   /**Consulta http post*/
   consultasPost(url:string, data:any): Observable<any>{
     let body = JSON.stringify(data);
-    return this.httpClient.post(url,body, this.httpOpciones);
+    return this.httpClient.post(environment.servicioURL+url,body, this.httpOpciones);
   }
 
   /**insertar nuevo registro http post*/
   insertar(url:string, data:any): Observable<any>{
     let body = JSON.stringify(data);
-    return this.httpClient.post(url,body, this.httpOpciones);
+    return this.httpClient.post(environment.servicioURL+url,body, this.httpOpciones);
   }
 
   /**actualizar registors http put*/
   actualizar(url:string, data:any): Observable<any>{
     let body = JSON.stringify(data);
-    return this.httpClient.put(url,body, this.httpOpciones);
+    return this.httpClient.put(environment.servicioURL+url,body, this.httpOpciones);
   }
 
   /**eliminar registro http put*/
   eliminar(url:string): Observable<any>{
-    return this.httpClient.delete(url, this.httpOpciones)
+    return this.httpClient.delete(environment.servicioURL+url, this.httpOpciones)
   }
 }

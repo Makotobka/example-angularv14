@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+export const routesPrincipales: Routes = [
   {
     path: "catalogos",
     //canActivate: [AdminGuard],
@@ -13,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routesPrincipales)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

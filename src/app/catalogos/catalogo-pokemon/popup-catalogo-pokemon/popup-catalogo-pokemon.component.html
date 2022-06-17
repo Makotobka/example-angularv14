@@ -1,51 +1,86 @@
 <div class="css-contenedor-popup">
-  <form>
-    <div>
-      <div>
-        <input
-          type="text"
-          id="nombre"
-          [formControl]="itemForm.controls['nombre']"
-        >
-      </div>
-      <div>
-        <input
-          type="text"
-          id="imagen"
-          [formControl]="itemForm.controls['imagen']"
-        >
-      </div>
-      <div>
-        <input
-          type="range"
-          id="Ataque"
-          [min]="minimo"
-          [max]="maximo"
-          [formControl]="itemForm.controls['ataque']"
-        >
-      </div>
-      <div>
-        <input
-          type="range"
-          id="defensa"
-          [min]="minimo"
-          [max]="maximo"
-          [formControl]="itemForm.controls['defensa']"
-        >
-      </div>
-      <div>
-        <button
-          (click)="guardar()"
-        >
-          Guardar
-        </button>
-        <button
-          (click)="regresar()"
-        >
-          Cancelar
-        </button>
-      </div>
+  <h3>{{ isNuevo ? 'Crear nuevo registro':('Editar registro '+ data?.name) }}</h3>
+  <form
+    *ngIf="itemForm"
+    [formGroup]="itemForm"
+    (submit)="submit()"
+  >
+    <div class="css-flex-grid">
+      <div class="css-flex-row-50 css-padding-1">
+        <app-app-input-data
+          lbl="Nombre:" plh="Nombre"
+          [cntrl]="itemForm.controls['name']"
+          [tpInp]="tipoInputConst.TEXTO"
 
+        ></app-app-input-data>
+      </div>
+      <div class="css-flex-row-50 css-padding-1">
+        <app-app-input-data
+          lbl="Tipo:" plh="Tipo"
+          [cntrl]="itemForm.controls['type']"
+          [tpInp]="tipoInputConst.TEXTO"
+        ></app-app-input-data>
+      </div>
+      <div class="css-flex-row-50 css-padding-1">
+        <app-app-input-data
+          [cntrl]="itemForm.controls['image']"
+          [tpInp]="tipoInputConst.TEXTO"
+          lbl="Imagen:" plh="Imagen"
+        ></app-app-input-data>
+      </div>
+      <div class="css-flex-row-50 css-padding-1">
+        <app-app-input-data
+          [cntrl]="itemForm.controls['attack']"
+          [tpInp]="tipoInputConst.RANGO"
+          lbl="Ataque:" plh="Ataque"
+          [min]="minimo" [max]="maximo"
+        ></app-app-input-data>
+
+      </div>
+      <div class="css-flex-row-50 css-padding-1 ">
+        <app-app-input-data
+          [cntrl]="itemForm.controls['defense']"
+          [tpInp]="tipoInputConst.RANGO"
+          lbl="Defensa:" plh="Defensa"
+          [min]="minimo" [max]="maximo"
+        ></app-app-input-data>
+
+      </div>
+      <div class="css-flex-row-50 css-padding-1">
+        <app-app-input-data
+          [cntrl]="itemForm.controls['hp']"
+          [tpInp]="tipoInputConst.RANGO"
+          lbl="Vida:" plh="Vida"
+          [min]="minimo" [max]="maximo"
+        ></app-app-input-data>
+      </div>
+      <div class="css-flex-row-100">
+        <div class="css-flex-grid">
+          <div class="css-flex-row-50 css-padding-1">
+            <button
+              class="css-boton-accion"
+              id="btn_submit"
+              [disabled]="itemForm.invalid"
+              [ngStyle]="{'background-color': itemForm.invalid ? '#514eef6b' : '#514eeff2'}"
+              type="submit"
+            >
+            <img class="css-icono-w" src="../../../../assets/iconos/save.png" alt="" />
+            {{ isNuevo ? 'Guardar': 'Actualizar' }}
+            </button>
+          </div>
+          <div class="css-flex-row-50 css-padding-1">
+            <button
+              class="css-boton-accion"
+              id="btn_cancelar"
+              type="button"
+              (click)="regresar()"
+            >
+              <img class="css-icono-w" src="../../../../assets/iconos/close.png" alt="" />
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>

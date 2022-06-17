@@ -1,18 +1,18 @@
 export interface IPokemon{
     /**Id del registro*/
-    id:number,
+    id?:number,
     /**Nombre del pokemon*/
-    name:string,
+    name?:string,
     /**Imagen minuatura del pokemon*/
-    image:string,
+    image?:string,
     /**Valor numero del ataque*/
-    attack:number,
+    attack?:number,
     /**Valor numerico de la defensa*/
-    defense:number,
+    defense?:number,
     /**Valor numero de la vida maxima*/
-    hp:number,
+    hp?:number,
     /**Tipo de pokemon*/
-    type:string,
-    /**???*/
-    id_author:number
+    type?:string
+
+    idAuthor?:string
 }

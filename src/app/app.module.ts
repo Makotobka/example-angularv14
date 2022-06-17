@@ -1,29 +1,25 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoPreloading, RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApiInterceptorService } from './core/servicios-core/interceptor/api-interceptor.service';
 import { ServiciosCoreModule } from './core/servicios-core/servicios-core.module';
+import { routesPrincipales } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     ServiciosCoreModule,
-    HttpClientModule
+    RouterModule.forRoot(routesPrincipales, {
+      useHash: false,
+      preloadingStrategy: NoPreloading,
+    }),
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptorService,
-      multi: true,
-    }
-  ],
-  declarations: [
-    AppComponent
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

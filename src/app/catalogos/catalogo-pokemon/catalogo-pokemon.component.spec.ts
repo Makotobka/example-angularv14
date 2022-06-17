@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonComponentModule } from 'src/app/core/common.module';
 import { CrudService } from 'src/app/shared/servicios/crud/crud.service';
 
 import { CatalogoPokemonComponent } from './catalogo-pokemon.component';
@@ -12,6 +13,7 @@ describe('CatalogoPokemonComponent', () => {
     await TestBed.configureTestingModule({
       imports:[
         HttpClientTestingModule,
+        CommonComponentModule
       ],
       providers:[
         CrudService

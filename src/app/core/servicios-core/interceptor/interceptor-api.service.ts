@@ -1,35 +1,29 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CodigosHTTP } from 'src/app/shared/constantes/constantes-http';
-import { UtilService } from '../../../shared/servicios/util/util.service';
+import { UtilService } from 'src/app/shared/servicios/util/util.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiInterceptorService implements HttpInterceptor {
+export class InterceptorApiService implements HttpInterceptor {
 
-  private token:string = "";
-  private autenticacionGet:string = "idAuthor=1";
+  constructor(private util:UtilService) { }
 
-  constructor() {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let parteValidacion = req.url.includes("?") ? "&" : "?";
+    parteValidacion += this.util.concatenarParametrosGet([{nombreParametro:"idAuthor",valor:"1"}], true);
+      req = req.clone({
+        url: req.url + parteValidacion
+      });
 
+    return next.handle(req).pipe(
+              catchError(this.interceptarError.bind(this) //Interceptor de error en el pipe de recepcion.
+           ));
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("sadsaxcz")
-    req = req.clone({
-      setHeaders: {
-        Authorization: "Bearer " + "asdasdasdasdasdasd",
-      },
-    });
-    return next.handle(req)
-            //.pipe(
-//              catchError(this.interceptarError.bind(this) //Interceptor de error en el pipe de recepcion.
-  //          ));
-  }
-
-  public interceptarError(errorApi: any){
+  private interceptarError(errorApi: any): Observable<HttpEvent<any>> {
     if (errorApi instanceof HttpErrorResponse) {
       switch (errorApi.status) {
         case CodigosHTTP.UNAUTHORIZED_CODE:
@@ -56,4 +50,10 @@ export class ApiInterceptorService implements HttpInterceptor {
     }
     return throwError(errorApi);
   }
+}
+
+export const activarInterceptor= {
+  provide: HTTP_INTERCEPTORS,
+  useClass: InterceptorApiService,
+  multi: true,
 }

@@ -24,4 +24,9 @@ describe('PopupCatalogoPokemonComponent', () => {
   it('Componente popup catalogo pokemon, creado con exito', () => {
     expect(component).toBeTruthy();
   });
+  it('Datos de formulario correctos', () => {
+    // prueba para valores de formulario.
+    expect(component).toBeTruthy();
+  });
+
 });

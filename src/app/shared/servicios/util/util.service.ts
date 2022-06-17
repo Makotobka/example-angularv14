@@ -13,8 +13,8 @@ export class UtilService {
   }
 
   /**Metodo utilizado para concatenar parametros get*/
-  public concatenarParametrosGet(lista:listaApiGet[]): string{
-    let parametros:string = "?";
+  public concatenarParametrosGet(lista:listaApiGet[], isNotCaracter?:boolean): string{
+    let parametros:string = isNotCaracter ? "" : "?";
     for (let index = 0; index < lista.length; index++) {
       let elemento = lista[index];
       parametros += (elemento.nombreParametro + "=" + elemento.valor);
@@ -22,5 +22,10 @@ export class UtilService {
         parametros += nomenclaturaHTTP.divisorParametrosGet;
     }
     return parametros;
+  }
+
+  /**Metodo para ser usado en el ngfor, mejor rendimiento*/
+  trackByFn(item:any) {
+    return item.id;
   }
 }
