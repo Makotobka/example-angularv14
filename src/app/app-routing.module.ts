@@ -9,6 +9,11 @@ export const routesPrincipales: Routes = [
     loadChildren: () =>
       import("./catalogos/catalogo.module").then((m) => m.CatalogoModule),
     data: { title: "Catalogo", module: "Catalogo" },
+  },
+  {
+    path: "",
+    redirectTo: "catalogos/pokemon",
+    pathMatch: "full",
   }
 ];
 

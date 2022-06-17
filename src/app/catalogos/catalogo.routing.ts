@@ -8,6 +8,11 @@ const routes: Routes = [
       import("./catalogo-pokemon/catalogo-pokemon.module").then((m) => m.CatalogoPokemonModule),
     data: { title: "Pokemon", module: "Pokemon" },
   },
+  {
+    path: "",
+    redirectTo: "pokemon",
+    pathMatch: "full",
+  }
 ];
 
 @NgModule({
