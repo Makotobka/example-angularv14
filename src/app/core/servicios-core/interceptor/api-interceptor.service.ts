@@ -12,26 +12,21 @@ export class ApiInterceptorService implements HttpInterceptor {
   private token:string = "";
   private autenticacionGet:string = "idAuthor=1";
 
-  constructor(private util:UtilService) { 
+  constructor() {
 
   }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("sadsa")
-    if(this.autenticacionGet){
-      /*
-      req = req.clone(
-        {
-          setHeaders:{
 
-          }
-        }
-      )
-      */
-    }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("sadsaxcz")
+    req = req.clone({
+      setHeaders: {
+        Authorization: "Bearer " + "asdasdasdasdasdasd",
+      },
+    });
     return next.handle(req)
-            .pipe( 
-              catchError(this.interceptarError.bind(this) //Interceptor de error en el pipe de recepcion.
-            ));
+            //.pipe(
+//              catchError(this.interceptarError.bind(this) //Interceptor de error en el pipe de recepcion.
+  //          ));
   }
 
   public interceptarError(errorApi: any){

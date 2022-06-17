@@ -14,7 +14,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('Modulo principal compilado', () => {
+  it('Modulo principal compilado con exito', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();

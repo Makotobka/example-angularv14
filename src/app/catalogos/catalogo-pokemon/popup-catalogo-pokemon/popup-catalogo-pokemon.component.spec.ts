@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PopupCatalogoPokemonComponent } from './popup-catalogo-pokemon.component';
 
@@ -8,16 +9,19 @@ describe('PopupCatalogoPokemonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopupCatalogoPokemonComponent ]
-    })
-    .compileComponents();
+      declarations: [ PopupCatalogoPokemonComponent ],
+      imports:[
+        FormsModule,
+        ReactiveFormsModule,
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PopupCatalogoPokemonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('Componente popup catalogo pokemon, creado', () => {
+  it('Componente popup catalogo pokemon, creado con exito', () => {
     expect(component).toBeTruthy();
   });
 });

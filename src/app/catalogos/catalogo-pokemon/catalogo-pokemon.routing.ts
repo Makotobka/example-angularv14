@@ -5,8 +5,6 @@ import { CatalogoPokemonComponent } from "./catalogo-pokemon.component";
 const routes: Routes = [
   {
     path: "",
-    //canActivate: [],
-    //canDeactivate: [],
     component: CatalogoPokemonComponent
   },
 ];
